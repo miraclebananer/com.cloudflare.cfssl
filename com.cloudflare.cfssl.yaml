@@ -5,6 +5,9 @@ sdk: org.freedesktop.Sdk
 sdk-extensions:
   - org.freedesktop.Sdk.Extension.golang
 command: cfssl
+rename-desktop-file: com.cloudflare.cfssl.desktop
+rename-appdata-file: com.cloudflare.cfssl.metainfo.xml
+rename-icon: com.cloudflare.cfssl
 finish-args:
   - --share=network
   - --filesystem=host
@@ -28,15 +31,33 @@ modules:
         path: com.cloudflare.cfssl.metainfo.xml
     
     build-commands:
-      # Build all cfssl binaries
-      - go build -v -o /app/bin/cfssl ./cmd/cfssl
-      - go build -v -o /app/bin/cfssljson ./cmd/cfssljson
-      - go build -v -o /app/bin/mkbundle ./cmd/mkbundle
-      - go build -v -o /app/bin/multirootca ./cmd/multirootca
-      - go build -v -o /app/bin/cfssl-bundle ./cmd/cfssl-bundle
-      - go build -v -o /app/bin/cfssl-certinfo ./cmd/cfssl-certinfo
-      - go build -v -o /app/bin/cfssl-newkey ./cmd/cfssl-newkey
-      - go build -v -o /app/bin/cfssl-scan ./cmd/cfssl-scan
+      # Build all cfssl binaries  
+      - go build -v -o /app/bin/cfssl.bin ./cmd/cfssl
+      - go build -v -o /app/bin/cfssljson.bin ./cmd/cfssljson
+      - go build -v -o /app/bin/mkbundle.bin ./cmd/mkbundle
+      - go build -v -o /app/bin/multirootca.bin ./cmd/multirootca
+      - go build -v -o /app/bin/cfssl-bundle.bin ./cmd/cfssl-bundle
+      - go build -v -o /app/bin/cfssl-certinfo.bin ./cmd/cfssl-certinfo
+      - go build -v -o /app/bin/cfssl-newkey.bin ./cmd/cfssl-newkey
+      - go build -v -o /app/bin/cfssl-scan.bin ./cmd/cfssl-scan
+      
+      # Create main command wrapper (for flatpak run com.cloudflare.cfssl)
+      - |
+        cat > /app/bin/cfssl << 'CFSSL_EOF'
+        #!/bin/sh
+        exec /app/bin/cfssl.bin "$@"
+        CFSSL_EOF
+        chmod +x /app/bin/cfssl
+      
+      # Create exported command wrappers for direct terminal use
+      - |
+        for cmd in cfssljson mkbundle multirootca cfssl-bundle cfssl-certinfo cfssl-newkey cfssl-scan; do
+          cat > /app/bin/${cmd} << EOF
+        #!/bin/sh
+        exec /app/bin/${cmd}.bin "\$@"
+        EOF
+          chmod +x /app/bin/${cmd}
+        done
       
       # Install metainfo
       - install -Dm644 com.cloudflare.cfssl.metainfo.xml /app/share/metainfo/com.cloudflare.cfssl.metainfo.xml
