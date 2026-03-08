@@ -36,6 +36,24 @@
       <li>Certificate information extraction</li>
       <li>Host security scanning</li>
     </ul>
+    <p><em>Usage Instructions:</em></p>
+    <p>
+      To use cfssl commands easily from your terminal, add the flatpak exports directory to your PATH:
+    </p>
+    <p>
+      <code>echo 'export PATH="$HOME/.local/share/flatpak/exports/bin:$PATH"' &gt;&gt; ~/.bashrc</code><br/>
+      <code>source ~/.bashrc</code>
+    </p>
+    <p>Then access commands directly:</p>
+    <ul>
+      <li><code>com.cloudflare.cfssl version</code> - Main cfssl command</li>
+      <li><code>flatpak run --command=cfssljson com.cloudflare.cfssl --help</code> - JSON processor</li>
+      <li><code>flatpak run --command=cfssl-certinfo com.cloudflare.cfssl --help</code> - Certificate info</li>
+    </ul>
+    <p>
+      All 8 binaries (cfssl, cfssljson, mkbundle, multirootca, cfssl-bundle, cfssl-certinfo, 
+      cfssl-newkey, cfssl-scan) are available using <code>flatpak run --command=&lt;name&gt; com.cloudflare.cfssl</code>.
+    </p>
   </description>
   <provides>
     <binary>cfssl</binary>
