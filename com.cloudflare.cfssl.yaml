@@ -1,0 +1,42 @@
+app-id: com.cloudflare.cfssl
+runtime: org.freedesktop.Platform
+runtime-version: '25.08'
+sdk: org.freedesktop.Sdk
+sdk-extensions:
+  - org.freedesktop.Sdk.Extension.golang
+command: cfssl
+finish-args:
+  - --share=network
+  - --filesystem=host
+
+build-options:
+  append-path: /usr/lib/sdk/golang/bin
+  env:
+    GOBIN: /app/bin
+    GO111MODULE: 'on'
+
+modules:
+  - name: cfssl
+    buildsystem: simple
+    sources:
+      - type: archive
+        url: https://github.com/cloudflare/cfssl/archive/refs/tags/v1.6.5.tar.gz
+        sha256: b682452402f403b6ee668bb042bd9b753fe48df84fa7a18a1c32606ffd4918af
+        dest-filename: cfssl-1.6.5.tar.gz
+      
+      - type: file
+        path: com.cloudflare.cfssl.metainfo.xml
+    
+    build-commands:
+      # Build all cfssl binaries
+      - go build -v -o /app/bin/cfssl ./cmd/cfssl
+      - go build -v -o /app/bin/cfssljson ./cmd/cfssljson
+      - go build -v -o /app/bin/mkbundle ./cmd/mkbundle
+      - go build -v -o /app/bin/multirootca ./cmd/multirootca
+      - go build -v -o /app/bin/cfssl-bundle ./cmd/cfssl-bundle
+      - go build -v -o /app/bin/cfssl-certinfo ./cmd/cfssl-certinfo
+      - go build -v -o /app/bin/cfssl-newkey ./cmd/cfssl-newkey
+      - go build -v -o /app/bin/cfssl-scan ./cmd/cfssl-scan
+      
+      # Install metainfo
+      - install -Dm644 com.cloudflare.cfssl.metainfo.xml /app/share/metainfo/com.cloudflare.cfssl.metainfo.xml

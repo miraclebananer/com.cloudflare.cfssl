@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component type="console-application">
+  <id>com.cloudflare.cfssl</id>
+  <metadata_license>CC0-1.0</metadata_license>
+  <project_license>BSD-2-Clause</project_license>
+  <name>CFSSL</name>
+  <summary>Cloudflare's PKI/TLS toolkit</summary>
+  <description>
+    <p>
+      CFSSL is Cloudflare's PKI/TLS swiss army knife. It is both a command line tool
+      and an HTTP API server for signing, verifying, and bundling TLS certificates.
+    </p>
+    <p>
+      CFSSL consists of a set of packages useful for building custom TLS PKI tools
+      and multiple command-line utilities:
+    </p>
+    <ul>
+      <li>cfssl - The main command line utility for certificate operations</li>
+      <li>multirootca - A certificate authority server supporting multiple signing keys</li>
+      <li>mkbundle - Build certificate pool bundles</li>
+      <li>cfssljson - Takes JSON output from cfssl and writes certificates to disk</li>
+      <li>cfssl-bundle - Build certificate bundles</li>
+      <li>cfssl-certinfo - Extract certificate information</li>
+      <li>cfssl-newkey - Generate private keys and certificate requests</li>
+      <li>cfssl-scan - Scan hosts for security issues</li>
+    </ul>
+    <p>Key Features:</p>
+    <ul>
+      <li>Sign, verify, and bundle TLS certificates</li>
+      <li>Generate certificate signing requests and private keys</li>
+      <li>Support for RSA and ECDSA keys</li>
+      <li>Certificate bundling with validation</li>
+      <li>OCSP signing and serving</li>
+      <li>Multi-root certificate authority support</li>
+      <li>RESTful API server for certificate operations</li>
+      <li>Certificate information extraction</li>
+      <li>Host security scanning</li>
+    </ul>
+  </description>
+  <provides>
+    <binary>cfssl</binary>
+    <binary>cfssljson</binary>
+    <binary>mkbundle</binary>
+    <binary>multirootca</binary>
+    <binary>cfssl-bundle</binary>
+    <binary>cfssl-certinfo</binary>
+    <binary>cfssl-newkey</binary>
+    <binary>cfssl-scan</binary>
+  </provides>
+  <launchable type="console-application">cfssl</launchable>
+  <url type="homepage">https://github.com/cloudflare/cfssl</url>
+  <url type="bugtracker">https://github.com/cloudflare/cfssl/issues</url>
+  <url type="help">https://github.com/cloudflare/cfssl/tree/master/doc</url>
+  <developer_name>Cloudflare</developer_name>
+  <categories>
+    <category>Development</category>
+    <category>Security</category>
+    <category>Network</category>
+  </categories>
+  <keywords>
+    <keyword>certificate</keyword>
+    <keyword>pki</keyword>
+    <keyword>tls</keyword>
+    <keyword>ssl</keyword>
+    <keyword>ca</keyword>
+    <keyword>security</keyword>
+    <keyword>crypto</keyword>
+  </keywords>
+  <releases>
+    <release version="1.6.5" date="2024-03-05">
+      <description>
+        <p>Bug fixes and security updates</p>
+      </description>
+    </release>
+  </releases>
+  <content_rating type="oars-1.1" />
+</component>
