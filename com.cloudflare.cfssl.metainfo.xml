@@ -84,6 +84,12 @@
     <keyword>security</keyword>
     <keyword>crypto</keyword>
   </keywords>
+    <releases>
+    <release version="1.7.2" date="2026-1-19">
+      <description>
+        <p>Latest version</p>
+      </description>
+    </release>
   <releases>
     <release version="1.6.5" date="2024-03-05">
       <description>

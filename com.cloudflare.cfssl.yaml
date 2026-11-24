@@ -20,9 +20,9 @@ modules:
     buildsystem: simple
     sources:
       - type: archive
-        url: https://github.com/cloudflare/cfssl/archive/refs/tags/v1.6.5.tar.gz
-        sha256: b682452402f403b6ee668bb042bd9b753fe48df84fa7a18a1c32606ffd4918af
-        dest-filename: cfssl-1.6.5.tar.gz
+        url: https://github.com/cloudflare/cfssl/archive/refs/tags/v1.7.2.tar.gz
+        sha256: 2f11682791c7d86fb24bfe1eb2a074a0a03bb8c7ad544da0daa12e43b747daa8
+        dest-filename: cfssl-1.7.2.tar.gz
       
       - type: file
         path: com.cloudflare.cfssl.metainfo.xml
