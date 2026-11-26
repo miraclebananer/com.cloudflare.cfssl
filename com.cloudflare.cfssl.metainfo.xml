@@ -90,7 +90,6 @@
         <p>Latest version</p>
       </description>
     </release>
-  <releases>
     <release version="1.6.5" date="2024-03-05">
       <description>
         <p>Bug fixes and security updates</p>
